@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 300;
+    font-display: swap;
     src: local('Poppins Light'), local('Poppins-Light'),
         url('/fonts/poppins-v13-latin-300.woff2') format('woff2'),
         url('/fonts/poppins-v13-latin-300.woff') format('woff');
@@ -15,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: local('Poppins Regular'), local('Poppins-Regular'),
         url('/fonts/poppins-v13-latin-regular.woff2') format('woff2'),
         url('/fonts/poppins-v13-latin-regular.woff') format('woff');
@@ -23,6 +25,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 600;
+    font-display: swap;
     src: local('Poppins SemiBold'), local('Poppins-SemiBold'),
         url('/fonts/poppins-v13-latin-600.woff2') format('woff2'),
         url('/fonts/poppins-v13-latin-600.woff') format('woff');
