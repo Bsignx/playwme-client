@@ -52,9 +52,11 @@ export default {
   title: 'GameCardSlider',
   component: GameCardSlider,
   args: { items },
-  parameters: { layout: 'fullscreen' },
-  backgrounds: {
-    default: 'dark'
+  parameters: {
+    layout: 'fullscreen',
+    backgrounds: {
+      default: 'dark'
+    }
   }
 } as Meta
 
