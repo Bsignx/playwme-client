@@ -11,6 +11,11 @@ export default {
     price: 'R$ 235,00',
     promotionalPrice: 'R$ 215,00'
   },
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  },
   argTypes: {
     onFav: { action: 'clicked' },
     ribbon: { type: 'string' }
