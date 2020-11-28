@@ -1,3 +1,11 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.div``
+import { CheckboxProps } from '.'
+
+export const Wrapper = styled.main``
+
+export const Label = styled.label<Pick<CheckboxProps, 'labelColor'>>`
+  ${({ theme, labelColor }) => css`
+    color: ${theme.colors[labelColor!]};
+  `}
+`
