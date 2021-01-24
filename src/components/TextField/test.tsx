@@ -7,31 +7,31 @@ import { renderWithTheme } from 'utils/tests/helpers'
 import TextField from '.'
 
 describe('<TextField />', () => {
-  it('should render with Label', () => {
-    renderWithTheme(<TextField label="Label" labelFor="Field" id="Field" />)
+  it('Renders with Label', () => {
+    renderWithTheme(<TextField label="Label" name="Label" />)
 
     expect(screen.getByLabelText('Label')).toBeInTheDocument()
   })
 
-  it('should render without Label', () => {
+  it('Renders without Label', () => {
     renderWithTheme(<TextField />)
 
     expect(screen.queryByLabelText('Label')).not.toBeInTheDocument()
   })
 
-  it('should render with placeholder', () => {
+  it('Renders with placeholder', () => {
     renderWithTheme(<TextField placeholder="hey you" />)
 
     expect(screen.getByPlaceholderText('hey you')).toBeInTheDocument()
   })
 
-  it('shoudl render with icon', () => {
+  it('Renders with Icon', () => {
     renderWithTheme(<TextField icon={<Email data-testid="icon" />} />)
 
     expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 
-  it('should render with icon on the right side', () => {
+  it('Renders with Icon on the right side', () => {
     renderWithTheme(
       <TextField icon={<Email data-testid="icon" />} iconPosition="right" />
     )
@@ -39,15 +39,10 @@ describe('<TextField />', () => {
     expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 })
   })
 
-  it('should change its value when typing', async () => {
+  it('Changes its value when typing', async () => {
     const onInput = jest.fn()
     renderWithTheme(
-      <TextField
-        onInput={onInput}
-        label="TextField"
-        labelFor="TextField"
-        id="TextField"
-      />
+      <TextField onInput={onInput} label="TextField" name="TextField" />
     )
 
     const input = screen.getByRole('textbox')
@@ -61,26 +56,13 @@ describe('<TextField />', () => {
     expect(onInput).toHaveBeenCalledWith(text)
   })
 
-  it('should be accessible by tab', () => {
-    renderWithTheme(
-      <TextField label="TextField" labelFor="TextField" id="TextField" />
-    )
-
-    const input = screen.getByLabelText('TextField')
-    expect(document.body).toHaveFocus()
-
-    userEvent.tab()
-    expect(input).toHaveFocus()
-  })
-
   it('Does not changes its value when disabled', async () => {
     const onInput = jest.fn()
     renderWithTheme(
       <TextField
         onInput={onInput}
         label="TextField"
-        labelFor="TextField"
-        id="TextField"
+        name="TextField"
         disabled
       />
     )
@@ -94,26 +76,7 @@ describe('<TextField />', () => {
     await waitFor(() => {
       expect(input).not.toHaveValue(text)
     })
-
     expect(onInput).not.toHaveBeenCalled()
-  })
-
-  it('Is not accessible by tab when disabled', () => {
-    renderWithTheme(
-      <TextField
-        label="TextField"
-        labelFor="TextField"
-        id="TextField"
-        disabled
-      />
-    )
-
-    const input = screen.getByLabelText('TextField')
-    expect(document.body).toHaveFocus()
-
-    userEvent.tab()
-
-    expect(input).not.toHaveFocus()
   })
 
   it('Renders with error', () => {
@@ -121,7 +84,6 @@ describe('<TextField />', () => {
       <TextField
         icon={<Email data-testid="icon" />}
         label="TextField"
-        labelFor="TextField"
         error="Error message"
       />
     )
@@ -129,5 +91,25 @@ describe('<TextField />', () => {
     expect(screen.getByText('Error message')).toBeInTheDocument()
 
     expect(container.firstChild).toMatchSnapshot()
+  })
+
+  it('Is accessible by tab', () => {
+    renderWithTheme(<TextField label="TextField" name="TextField" />)
+
+    const input = screen.getByLabelText('TextField')
+    expect(document.body).toHaveFocus()
+
+    userEvent.tab()
+    expect(input).toHaveFocus()
+  })
+
+  it('Is not accessible by tab when disabled', () => {
+    renderWithTheme(<TextField label="TextField" name="TextField" disabled />)
+
+    const input = screen.getByLabelText('TextField')
+    expect(document.body).toHaveFocus()
+
+    userEvent.tab()
+    expect(input).not.toHaveFocus()
   })
 })
